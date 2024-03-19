@@ -1,0 +1,61 @@
+local Plugin = {
+    ["PluginName"] = "gotoall",
+    ["PluginDescription"] = "goto all players",
+    ["Commands"] = {
+        ["toolview"] = {
+            ["ListName"] = "toall / gotoall [delay]",
+            ["Description"] = "loop tp to all players",
+            ["Aliases"] = {"gotoall", "toall"},
+            ["Function"] = function(args, speaker)
+		local delay = getstring(1) or 0
+            	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+			if v ~= game:GetService("Players").LocalPlayer then
+				game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = v.Character:WaitForChild("HumanoidRootPart").CFrame
+				wait(delay)
+			end
+		end
+            end
+        },
+		["loopplaysounds"] = {
+			["ListName"] = "loopgotoall / looptoall [delay]",
+			["Description"] = "loop tp to all players",
+			["Aliases"] = {"loopgotoall", "looptoall"},
+			["Function"] = function(args, speaker)
+				local delay = getstring(1) or 0
+				if looptpall ~= nil then
+					return
+				end
+				getgenv().looptp = true
+				spawn(function()
+					while true do wait()
+						if not getgenv().looptp then break end
+						for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+							if v ~= game:GetService("Players").LocalPlayer then
+								game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = v.Character:WaitForChild("HumanoidRootPart").CFrame
+								wait(delay)
+							end
+						end
+					end
+				end)
+				
+			end,
+		},
+		["unloopplaysounds"] = {
+			["ListName"] = "unloopgotoall / unlooptoall",
+			["Description"] = "stop loop tp to all players",
+			["Aliases"] = {"unloopgotoall", "unlooptoall"},
+			["Function"] = function(args, speaker)
+				if getgenv().looptp == nil then
+					return
+				end
+				if getgenv().looptp == false then
+					return
+				end
+				if getgenv().looptp == true then
+					getgenv().looptp = false
+				end
+			end,
+		},
+    },
+}
+return Plugin
