@@ -2,8 +2,8 @@ local Plugin = {
     ["PluginName"] = "gotoall",
     ["PluginDescription"] = "goto all players",
     ["Commands"] = {
-        ["toolview"] = {
-            ["ListName"] = "toall / gotoall [delay]",
+        ["gotoall"] = {
+            ["ListName"] = "gotoall / toall [delay]",
             ["Description"] = "loop tp to all players",
             ["Aliases"] = {"gotoall", "toall"},
             ["Function"] = function(args, speaker)
@@ -16,7 +16,7 @@ local Plugin = {
 		end
             end
         },
-		["loopplaysounds"] = {
+		["loopgotoall"] = {
 			["ListName"] = "loopgotoall / looptoall [delay]",
 			["Description"] = "loop tp to all players",
 			["Aliases"] = {"loopgotoall", "looptoall"},
@@ -40,7 +40,7 @@ local Plugin = {
 				
 			end,
 		},
-		["unloopplaysounds"] = {
+		["unloopgotoall"] = {
 			["ListName"] = "unloopgotoall / unlooptoall",
 			["Description"] = "stop loop tp to all players",
 			["Aliases"] = {"unloopgotoall", "unlooptoall"},
