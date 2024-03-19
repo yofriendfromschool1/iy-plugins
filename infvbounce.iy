@@ -1,0 +1,48 @@
+local lp = game:FindService("Players").LocalPlayer
+local rs = game:FindService("RunService")
+local Plugin = {
+    ["PluginName"] = "infvbounce",
+    ["PluginDescription"] = "INFVBOUNCE IS FINALLY HERE",
+    ["Commands"] = {
+        ["infvbounce"] = {
+            ["ListName"] = "infvbounce [Power]",
+            ["Description"] = "ITS REAL",
+            ["Aliases"] = {""},
+            ["Function"] = function(args,speaker)
+		getgenv().loopinfvbounce = true
+                spawn(function()
+			while true do wait()
+				if not getgenv().loopinfvbounce then break end
+				if not lp.Character or not lp.Character:FindFirstChildWhichIsA("Humanoid") or not lp.Character:FindFirstChildWhichIsA("Humanoid").RootPart then return notify("No Character/RootPart") end
+                		Power = getstring(1)
+                		local BodyVelocity = Instance.new("BodyVelocity")
+                		BodyVelocity.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+                		BodyVelocity.Parent = lp.Character:FindFirstChildWhichIsA("Humanoid").RootPart
+                		BodyVelocity.velocity = Vector3.new(0,tonumber(Power) or 100,0)
+                		rs.Heartbeat:Wait()
+                		if BodyVelocity then
+                    			BodyVelocity:Destroy()
+                		end
+			end
+		end)
+            end
+},
+  ["uninfvbounce"] = {
+			["ListName"] = "uninfvbounce",
+			["Description"] = "stop infvbounce",
+			["Aliases"] = {},
+			["Function"] = function(args, speaker)
+				if getgenv().loopinfvbounce == nil then
+					return
+				end
+				if getgenv().loopinfvbounce == false then
+					return
+				end
+				if getgenv().loopinfvbounce == true then
+					getgenv().loopinfvbounce = false
+				end
+			end,
+		},
+    },
+}
+return Plugin
