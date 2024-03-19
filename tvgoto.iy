@@ -1,0 +1,22 @@
+local Plugin = {
+    ["PluginName"] = "tweenvGoto",
+    ["PluginDescription"] = "vehicle Tween goto",
+    ["Commands"] = {
+        ["toolview"] = {
+            ["ListName"] = "tvgoto / tweenvehiclegoto [user]",
+            ["Description"] = "backpack + character",
+            ["Aliases"] = {"tvgoto", "tweenvehiclegoto"},
+            ["Function"] = function(args, speaker)
+            	local players = getPlayer(args[1], speaker)
+		for i,v in pairs(players)do
+			if Players[v].Character ~= nil then
+				local seat = speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart
+				local vehicleModel = seat:FindFirstAncestorWhichIsA("Model")
+				TweenService:Create(getRoot(speaker.Character), TweenInfo.new(tweenSpeed, Enum.EasingStyle.Linear), {vehicleModel:MoveTo(getRoot(Players[v].Character).Position)}):Play()
+			end
+		end
+            end
+        }
+    }
+}
+return Plugin

@@ -1,0 +1,50 @@
+local LOOP = true
+local Plugin = {
+	["PluginName"] = "Flings ur target",
+	["PluginDescription"] = "uuj#7777 dm me if this dont work",
+	["Commands"] = {
+
+		["targetfling"] = {
+			["ListName"] = "targetfling [player]",
+			["Description"] = 'Flings target',
+			["Aliases"] = {'tfling', 'targetf'},
+			["Function"] = function(args,speaker) 
+				local Plrs = game:GetService('Players')
+				local LP = Plrs.LocalPlayer
+				local LOOP = true
+				
+				
+				local Loop; Loop=game:GetService('RunService').RenderStepped:Connect(function()
+					if LP.Character then
+						for k,v in pairs(getPlayer(args[1], speaker)) do
+							local target = Plrs[v]
+							
+							if LP.Character:FindFirstChild('HumanoidRootPart') then
+								LP.Character.HumanoidRootPart.CFrame = target.Character:FindFirstChild('HumanoidRootPart').CFrame * target.Character:FindFirstChild('HumanoidRootPart').Velocity/4.3
+								execCmd("fling",speaker)  
+							else
+								print('No root part found.. Player is dead or this game just has nothing named humanoidrootpart in the chars')
+							end
+						end
+						if not LOOP then
+							Loop:Disconnect()
+						end
+					else
+						LP.CharacterAdded:Wait()
+					end
+				end)
+			end,
+		};
+		["untargetfling"] = {
+			["ListName"] = "untargetfling",
+			["Description"] = 'Stops flinging target',
+			["Aliases"] = {'untfling', 'untargetf'},
+			["Function"] = function(args,speaker) 
+					LOOP = not LOOP				
+				end
+		};
+	}
+}
+
+return Plugin
+

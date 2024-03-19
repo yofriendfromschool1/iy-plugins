@@ -1,0 +1,26 @@
+local lp = game:FindService("Players").LocalPlayer
+local rs = game:FindService("RunService")
+local Plugin = {
+    ["PluginName"] = "vbounce",
+    ["PluginDescription"] = "VBOUNCE IS FINALLY HERE",
+    ["Commands"] = {
+        ["vbounce"] = {
+            ["ListName"] = "vbounce [Power]",
+            ["Description"] = "ITS REAL",
+            ["Aliases"] = {""},
+            ["Function"] = function(args,speaker)
+                if not lp.Character or not lp.Character:FindFirstChildWhichIsA("Humanoid") or not lp.Character:FindFirstChildWhichIsA("Humanoid").RootPart then return notify("No Character/RootPart") end
+                Power = getstring(1)
+                local BodyVelocity = Instance.new("BodyVelocity")
+                BodyVelocity.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+                BodyVelocity.Parent = lp.Character:FindFirstChildWhichIsA("Humanoid").RootPart
+                BodyVelocity.velocity = Vector3.new(0,tonumber(Power) or 100,0)
+                rs.Heartbeat:Wait()
+                if BodyVelocity then
+                    BodyVelocity:Destroy()
+                end
+            end
+        },
+    }
+}
+return Plugin

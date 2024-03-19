@@ -1,0 +1,55 @@
+local Plugin = {
+	["PluginName"] = "Airwalk",
+	["PluginDescription"] = "Walk on air",
+	["Commands"] = {
+		["airwalk"] = {
+			["ListName"] = "airwalk",
+			["Description"] = 'Walk On Air (Jump to go higher)',
+			["Aliases"] = {'airw', 'awalk'},
+			["Function"] = function(args,speaker) 
+				local Chat = game:GetService('Players').LocalPlayer.Chatted
+				local function AirWalk()
+
+					local AirWPart = Instance.new("Part", workspace)
+					local crtl = true
+					local Mouse = game.Players.LocalPlayer:GetMouse()
+					AirWPart.Size = Vector3.new(7, 2, 3)
+					AirWPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0, -4, 0)
+					AirWPart.Transparency = 1
+					AirWPart.Anchored = true
+					AirWPart.Name = "Airwalk"
+					for i = 1, math.huge do
+						AirWPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0, -4, 0)
+						wait (.1)
+					end
+				end
+				local function SendNotification(Title, Text, Label, Length)
+					game.StarterGui:SetCore('SendNotification', {Title = Title; Text = Text; Icon = Label; Duration = Length })
+				end
+				AirWalk()
+				
+				SendNotification('Notification', 'Airwalk : On',nil,2)
+			end
+		};
+		["unairwalk"] = {
+			["ListName"] = "unairwalk",
+			["Description"] = 'Disables airwalk',
+			["Aliases"] = {'unairw', 'unawalk'},
+			["Function"] = function(args,speaker) 
+				local function SendNotification(Title, Text, Label, Length)
+					game.StarterGui:SetCore('SendNotification', {Title = Title; Text = Text; Icon = Label; Duration = Length })
+				end
+				for i, v in pairs(workspace:GetChildren()) do
+					if tostring(v) == "Airwalk" then
+						v:Destroy()
+						SendNotification('Notification', 'Airwalk : Off',nil,2)
+					else
+						SendNotification('Notification', 'Airwalk : Already Off')
+				end
+			end
+		end,
+		}
+	}
+}
+
+return Plugin

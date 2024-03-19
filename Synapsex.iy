@@ -1,0 +1,16 @@
+local Plugin = {
+	["PluginName"] = "Synapse X",
+	["PluginDescription"] = "Synapse X Execution",
+	["Commands"] = {
+		["darkdex"] = {
+			["ListName"] = "synx",
+			["Description"] = "Executes scripts",
+			["Aliases"] = {},
+			["Function"] = function(args, speaker)
+				loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub/main/Synapse_UI.txt"))()
+			end,
+		},
+	},
+}
+
+return Plugin

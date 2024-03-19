@@ -1,0 +1,1 @@
+return loadstring(game:HttpGetAsync(("https://cdn.jsdelivr.net/gh/protogens/things-i-ll-probably-use@main/interactable%20objects%20esp%20plugin"), true))()
